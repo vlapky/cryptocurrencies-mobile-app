@@ -7,10 +7,20 @@ const Item = ({
   secondCurrency,
   secondCurrencyValue,
   logo,
+  dynamicStyles,
 }) => {
+  const {
+    dynamicBackGround,
+    dynamicBorderColor,
+    dynamicTextColor,
+  } = dynamicStyles
   return (
-    <View style={styles.conteiner}>
+    <View style={[styles.conteiner, dynamicBackGround, dynamicBorderColor]}>
       <Image
+        backgroundColor={
+          dynamicBackGround.backgroundColor === '#000' && '#4e4e4e'
+        }
+        borderRadius={dynamicBackGround.backgroundColor === '#000' && '50%'}
         source={{
           uri: logo,
         }}
@@ -18,10 +28,10 @@ const Item = ({
       />
       <View style={styles.textContainer}>
         <Text
-          style={styles.text}
+          style={[styles.text, dynamicTextColor]}
         >{`${firstСurrency} ${firstСurrencyValue}`}</Text>
         <Text
-          style={styles.text}
+          style={[styles.text, dynamicTextColor]}
         >{`${secondCurrency} ${secondCurrencyValue}`}</Text>
       </View>
     </View>
@@ -30,24 +40,27 @@ const Item = ({
 
 const styles = StyleSheet.create({
   conteiner: {
-    borderRadius: 3,
+    borderColor: '#292929',
+    borderStyle: 'solid',
+    borderWidth: 1.5,
 
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
 
-    backgroundColor: '#fff0f5',
+    backgroundColor: '#fff',
 
     marginHorizontal: 5,
     marginVertical: 3,
 
-    padding: 5,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
   },
   textContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   text: {
-    fontFamily: 'Avenir',
     fontSize: 20,
     color: '#181917',
   },

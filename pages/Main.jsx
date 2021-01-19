@@ -3,10 +3,11 @@ import { ScrollView } from 'react-native'
 import Item from '../components/Item'
 import Header from '../components/Header'
 
-const Main = ({ data, handleClick }) => {
+const Main = ({ dynamicStyles, currency, data, handleClick }) => {
   return (
-    <ScrollView style={{ backgroundColor: '#badbad' }}>
+    <ScrollView style={dynamicStyles.dynamicBackGround}>
       <Header
+        dynamicStyles={dynamicStyles}
         title="Cryptocurrencies"
         buttonTitle="Settings"
         handleClick={handleClick}
@@ -37,8 +38,9 @@ const Main = ({ data, handleClick }) => {
             logo={logoLink}
             firstСurrency={symbol}
             firstСurrencyValue="1"
-            secondCurrency="USD"
+            secondCurrency={currency}
             secondCurrencyValue={Number(priceUsd).toFixed(2)}
+            dynamicStyles={dynamicStyles}
           />
         )
       })}

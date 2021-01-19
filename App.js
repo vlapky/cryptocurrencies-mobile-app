@@ -8,6 +8,8 @@ import Settings from './pages/Settings'
 export default function App() {
   const [page, changePage] = useState('main')
   const [data, changeData] = useState([])
+  const [currency, changeCurrency] = useState('USD')
+  const [theme, changeTheme] = useState('light')
 
   useEffect(
     () => {
@@ -21,18 +23,44 @@ export default function App() {
       changePage('error')
     }
   )
+
+  const dynamicStyles = {
+    dynamicBackGround: {
+      backgroundColor: theme === 'light' ? '#fff' : '#000',
+    },
+    dynamicBorderColor: {
+      borderColor: theme === 'light' ? '#000' : '#fff',
+    },
+    dynamicTextColor: {
+      color: theme === 'light' ? '#181917' : '#fff',
+    },
+  }
+
   return (
     <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar translucent barStyle="dark-content" />
+
       {page === 'main' && (
-        <Main data={data} handleClick={() => changePage('settings')} />
+        <Main
+          dynamicStyles={dynamicStyles}
+          currency={currency}
+          data={data}
+          handleClick={() => changePage('settings')}
+        />
       )}
       {page === 'settings' && (
-        <Settings handleClick={() => changePage('main')} />
+        <Settings
+          dynamicStyles={dynamicStyles}
+          theme={theme}
+          changeTheme={changeTheme}
+          currency={currency}
+          changeCurrency={changeCurrency}
+          handleClick={() => changePage('main')}
+        />
       )}
       {page === 'error' && (
         <View>
-          <Text>Error</Text>
+          <Text>ERROR: Data download error!</Text>
         </View>
       )}
     </SafeAreaView>
