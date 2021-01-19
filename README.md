@@ -1,10 +1,19 @@
 # Cryptocurrencies / Трекер криптовалют
+
 ## Мобильное приложение для отслеживания курса криптовалют
+
 Технологии:
-* React Native
+
+- React Native
 
 API курса валют https://docs.coincap.io/
 
 API иконок https://cryptologos.cc/
 
-![img](/assets/main.jpg)
+### Главный экран
+
+![main](./assets/main.jpg)
+
+### Настройки
+
+![settings](./assets/settings.jpg)
