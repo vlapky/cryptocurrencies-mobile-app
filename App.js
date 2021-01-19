@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StatusBar, SafeAreaView, View, Text } from 'react-native'
+import { useState, useEffect } from 'react'
+
+import Main from './pages/Main'
+import Settings from './pages/Settings'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [page, changePage] = useState('main')
+  const [data, changeData] = useState([])
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(
+    () => {
+      fetch('https://api.coincap.io/v2/assets')
+        .then((res) => res.json())
+        .then((result) => {
+          changeData(result.data)
+        })
+    },
+    (error) => {
+      changePage('error')
+    }
+  )
+  return (
+    <SafeAreaView>
+      <StatusBar barStyle="dark-content" />
+      {page === 'main' && (
+        <Main data={data} handleClick={() => changePage('settings')} />
+      )}
+      {page === 'settings' && (
+        <Settings handleClick={() => changePage('main')} />
+      )}
+      {page === 'error' && (
+        <View>
+          <Text>Error</Text>
+        </View>
+      )}
+    </SafeAreaView>
+  )
+}
