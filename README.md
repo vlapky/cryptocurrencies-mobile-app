@@ -6,3 +6,5 @@
 API курса валют https://docs.coincap.io/
 
 API иконок https://cryptologos.cc/
+
+![img](/assets/main.jpg)
